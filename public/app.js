@@ -87,7 +87,15 @@ async function ask(){
     if(saved.error)throw saved.error;
     await supabase.from("conversations").update({updated_at:new Date().toISOString()}).eq("id",activeConversationId).eq("user_id",currentUser.id);
     $("#status").textContent="Answer saved to your library.";await loadHistory();
-  }catch(err){$("#status").textContent=err.message||"Something went wrong. Please try again.";addMessage("assistant","I couldn't complete that request. Please check your connection and try again.");}
+  }catch(err){
+    let message=err?.message||"Something went wrong. Please try again.";
+    if(err?.context && typeof err.context.clone==="function"){
+      const detail=await err.context.clone().json().catch(()=>null);
+      if(detail?.error) message=detail.error;
+    }
+    $("#status").textContent=message;
+    addMessage("assistant",message);
+  }
   finally{busy=false;btn.disabled=false;btn.innerHTML='Ask AI <span>↗</span>';}
 }
 $("#askBtn").addEventListener("click",ask);
