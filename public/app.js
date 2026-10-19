@@ -63,6 +63,9 @@ async function openConversation(id){
 }
 async function showApp(user){
   currentUser=user;authPanel.classList.add("hidden");appPanel.classList.remove("hidden");$("#signOutBtn").classList.remove("hidden");$("#userLabel").textContent=user.email||"Signed in";
+  const displayName=user.user_metadata?.display_name||user.email?.split("@")[0]||"Student";
+  const profile=await supabase.from("profiles").upsert({id:user.id,display_name:displayName},{onConflict:"id"});
+  if(profile.error) console.warn("Profile sync:",profile.error.message);
   await loadHistory();
 }
 async function ask(){
@@ -92,6 +95,6 @@ $("#prompt").addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.ctrlKey||e.me
 async function init(){
   const {data:{session}}=await supabase.auth.getSession();
   if(session?.user)await showApp(session.user);
-  supabase.auth.onAuthStateChange(async(event,session)=>{if(event==="SIGNED_IN"&&session?.user&&!currentUser)await showApp(session.user);if(event==="SIGNED_OUT"){currentUser=null;appPanel.classList.add("hidden");authPanel.classList.remove("hidden");}});
+  supabase.auth.onAuthStateChange((event)=>{if(event==="SIGNED_OUT"){currentUser=null;activeConversationId=null;appPanel.classList.add("hidden");authPanel.classList.remove("hidden");$("#signOutBtn").classList.add("hidden");$("#userLabel").textContent="";}});
 }
 init();
