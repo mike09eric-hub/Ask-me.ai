@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100d1d"><title>Ask Me.ai — Your academic copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="/"><span class="brandmark">✦</span> Ask Me<span class="accent">.ai</span></a><a class="admin-link" href="/admin">Admin</a></header>
+<main class="shell">
+<section class="hero"><div class="eyebrow">YOUR ACADEMIC COPILOT</div><h1>Think clearer.<br><span class="gradient">Learn smarter.</span></h1><p>Ask questions, solve problems and understand difficult topics with step-by-step guidance.</p></section>
+<section class="quick-grid">
+<button class="quick active" data-prompt="Solve this question step by step: ">✎ <span>Ask & solve</span></button>
+<button class="quick" data-prompt="Explain this topic in simple terms with examples: ">◈ <span>Understand</span></button>
+<button class="quick" data-prompt="Help me plan an academic project on: ">▤ <span>Project help</span></button>
+<button class="quick" data-prompt="Summarise these study notes and create revision questions: ">⌁ <span>Study notes</span></button>
+</section>
+<section class="workspace"><div class="section-head"><div><div class="eyebrow">ASK ANYTHING</div><h2>Your study space</h2></div><span class="online"><i></i> Online AI</span></div>
+<textarea id="prompt" placeholder="Type your assignment, question or topic here..."></textarea>
+<div class="composer-foot"><span>Be curious. Learn responsibly.</span><button id="askBtn" class="primary">Ask AI <span>↗</span></button></div>
+<div id="status" class="status" role="status"></div><article id="answer" class="answer hidden"></article></section>
+<footer>Ask Me.ai · AI can make mistakes. Verify important academic facts and references.</footer>
+</main><script src="/app.js"></script>
+</body></html>
