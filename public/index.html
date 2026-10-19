@@ -2,24 +2,41 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#100d1d"><title>Ask Me.ai — Your academic copilot</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#100d1d"><meta name="description" content="Ask Me.ai — your academic learning copilot.">
+<title>Ask Me.ai — Your academic copilot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-<header class="topbar"><a class="brand" href="/"><span class="brandmark">✦</span> Ask Me<span class="accent">.ai</span></a><a class="admin-link" href="/admin">Admin</a></header>
+<header class="topbar"><a class="brand" href="/"><span class="brandmark">✦</span> Ask Me<span class="accent">.ai</span></a><div class="top-actions"><span id="userLabel" class="user-label"></span><button id="signOutBtn" class="text-btn hidden">Sign out</button></div></header>
 <main class="shell">
-<section class="hero"><div class="eyebrow">YOUR ACADEMIC COPILOT</div><h1>Think clearer.<br><span class="gradient">Learn smarter.</span></h1><p>Ask questions, solve problems and understand difficult topics with step-by-step guidance.</p></section>
+<section class="hero"><div class="eyebrow">YOUR ACADEMIC COPILOT</div><h1>Think clearer.<br><span class="gradient">Learn smarter.</span></h1><p>Ask questions, solve problems and understand difficult topics with patient, step-by-step guidance.</p></section>
+<section id="authPanel" class="auth-panel">
+<div class="auth-copy"><div class="eyebrow">WELCOME TO YOUR STUDY SPACE</div><h2 id="authHeading">Your next breakthrough starts here.</h2><p>Sign in to ask questions and keep your study conversations together.</p></div>
+<form id="authForm" class="auth-form">
+<label for="displayName" id="nameLabel" class="hidden">Your name</label><input id="displayName" class="hidden" type="text" autocomplete="name" placeholder="Your name">
+<label for="email">Email address</label><input id="email" type="email" autocomplete="email" required placeholder="you@example.com">
+<label for="password">Password</label><input id="password" type="password" autocomplete="current-password" minlength="6" required placeholder="At least 6 characters">
+<button id="authBtn" class="primary full" type="submit">Sign in <span>↗</span></button>
+<div class="auth-switch"><span id="switchText">New to Ask Me.ai?</span> <button id="switchMode" class="inline-btn" type="button">Create account</button></div>
+<div id="authStatus" class="status" role="status"></div>
+</form></section>
+<section id="appPanel" class="app-layout hidden">
+<aside class="history-panel"><div class="history-head"><div><div class="eyebrow">YOUR LIBRARY</div><h3>Recent chats</h3></div><button id="newChatBtn" class="new-chat" type="button" aria-label="Start a new chat">＋</button></div><div id="historyList" class="history-list"><p class="muted small">Your saved conversations will appear here.</p></div></aside>
+<div class="main-work">
 <section class="quick-grid">
-<button class="quick active" data-prompt="Solve this question step by step: ">✎ <span>Ask & solve</span></button>
-<button class="quick" data-prompt="Explain this topic in simple terms with examples: ">◈ <span>Understand</span></button>
-<button class="quick" data-prompt="Help me plan an academic project on: ">▤ <span>Project help</span></button>
-<button class="quick" data-prompt="Summarise these study notes and create revision questions: ">⌁ <span>Study notes</span></button>
+<button class="quick active" data-category="solve" data-prompt="Solve this question step by step: " type="button"><span class="quick-icon">✎</span><span>Ask & solve</span></button>
+<button class="quick" data-category="explain" data-prompt="Explain this topic in simple terms with examples: " type="button"><span class="quick-icon">◈</span><span>Understand</span></button>
+<button class="quick" data-category="project" data-prompt="Help me plan an academic project on: " type="button"><span class="quick-icon">▤</span><span>Project help</span></button>
+<button class="quick" data-category="study" data-prompt="Summarise these study notes and create revision questions: " type="button"><span class="quick-icon">⌁</span><span>Study notes</span></button>
 </section>
-<section class="workspace"><div class="section-head"><div><div class="eyebrow">ASK ANYTHING</div><h2>Your study space</h2></div><span class="online"><i></i> Online AI</span></div>
-<textarea id="prompt" placeholder="Type your assignment, question or topic here..."></textarea>
-<div class="composer-foot"><span>Be curious. Learn responsibly.</span><button id="askBtn" class="primary">Ask AI <span>↗</span></button></div>
-<div id="status" class="status" role="status"></div><article id="answer" class="answer hidden"></article></section>
+<section class="workspace"><div class="section-head"><div><div class="eyebrow">ASK ANYTHING</div><h2>Your study space</h2></div><span class="online"><i></i> AI ready</span></div>
+<div id="thread" class="thread"><div class="welcome-card"><div class="welcome-icon">✦</div><h3>What are we learning today?</h3><p>Ask a question, paste a maths problem or tell me what topic is giving you trouble.</p></div></div>
+<textarea id="prompt" maxlength="12000" placeholder="Type your assignment, question or topic here..."></textarea>
+<div class="composer-foot"><span>Clear questions get better answers.</span><button id="askBtn" class="primary" type="button">Ask AI <span>↗</span></button></div>
+<div id="status" class="status" role="status"></div></section>
+</div></section>
 <footer>Ask Me.ai · AI can make mistakes. Verify important academic facts and references.</footer>
-</main><script src="/app.js"></script>
+</main><script type="module" src="/app.js"></script>
 </body></html>
