@@ -162,6 +162,6 @@ app.post("/api/ask", askLimiter, async (req, res) => {
 
 app.use(express.static("public", { extensions: ["html"] }));
 app.get("/admin", (_req, res) => res.sendFile(path.resolve("public/admin.html")));
-app.get("*", (_req, res) => res.sendFile(path.resolve("public/index.html")));
+// The public/index.html file is served automatically by express.static at the site root.
 
 app.listen(PORT, () => console.log(`Ask Me.ai backend listening on port ${PORT}`));
